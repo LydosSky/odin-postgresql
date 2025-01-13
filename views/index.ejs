@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+    <%- include('./partials/header.ejs', { title: locals.title })  %>
+    <body>
+        <form method="POST" action="/new">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" />
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </body>
+</html>
