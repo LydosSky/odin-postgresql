@@ -1,5 +1,9 @@
 #! /usr/bin/env node
 
+// DOTENV SETUP
+const dotenv = require('dotenv');
+dotenv.config();
+
 const { Client } = require('pg');
 
 const SQL = `
@@ -16,9 +20,8 @@ VALUES
 `;
 
 async function main() {
-  console.log('seeding...');
   const client = new Client({
-    connectionString: 'postgresql://rylan:password@localhost:5432/top_users',
+    connectionString: `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_DB}`,
   });
   await client.connect();
   await client.query(SQL);

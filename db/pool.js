@@ -1,13 +1,13 @@
 const { Pool } = require('pg');
 
-module.exports = new Pool({
-  host: 'localhost',
-  user: 'rylan',
-  database: 'top_users',
-  password: 'password',
-  port: 5432,
-});
-
 // module.exports = new Pool({
-//   connectionString: "postgresql://<role_name>:<role_password>@localhost:5432/top_users"
+//   host: process.env.DATABASE_HOST,
+//   user: process.env.DATABASE_USER,
+//   database: process.env.DATABASE_DB,
+//   password: process.env.DATABASE_PASSWORD,
+//   port: process.env.DATABASE_PORT,
 // });
+
+module.exports = new Pool({
+  connectionString: `postgresql://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/${process.env.DATABASE_DB}`,
+});
