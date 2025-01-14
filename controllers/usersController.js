@@ -1,13 +1,17 @@
 const db = require('../db/queries');
 
 const usersGet = async function (req, res) {
+  let searchResults;
+  const { search } = req.query;
+  if (search) {
+    searchResults = await db.searchUsername(search);
+  }
   const usernames = await db.getAllUsernames();
-  console.log('Usernames: ', usernames);
-  res.send('Usernames: ' + usernames.map((user) => user.username).join(', '));
+  res.render('index', { usernames, searchResults });
 };
 
 const usersNewGet = function (req, res) {
-  ores.render('index', { title: 'Add User' });
+  res.render('index', { title: 'Add User' });
 };
 
 const usersNewPost = async function (req, res) {
@@ -16,12 +20,4 @@ const usersNewPost = async function (req, res) {
   res.redirect('/');
 };
 
-const usersSearchGet = async function (req, res) {
-  const { search } = req.query;
-  const usernames = await db.searchUsername(search);
-  res.send(
-    'Search Results: ' + usernames.map((user) => user.username).join(', '),
-  );
-};
-
-module.exports = { usersGet, usersNewGet, usersNewPost, usersSearchGet };
+module.exports = { usersGet, usersNewGet, usersNewPost };

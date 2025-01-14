@@ -2,12 +2,37 @@
 <html lang="en">
     <%- include('./partials/header.ejs', { title: locals.title })  %>
     <body>
+        <form method="GET" action="/">
+            <div>
+                <label for="search">Search: </label>
+                <input type="text" name="search" id="search" />
+                <button type="submit">Search</button>
+            </div>
+        </form>
         <form method="POST" action="/new">
             <div>
-                <label for="username">Username:</label>
+                <label for="username">Add User: </label>
                 <input type="text" name="username" id="username" />
                 <button type="submit">Submit</button>
             </div>
         </form>
+
+       <% if(searchResults) {%>
+           <h2>Search Results:</h2>
+           <ul>
+            <% searchResults.forEach(user => { %>
+                <li>
+                    <%= user.username %>
+                </li>
+            <% }); %>
+           </ul>
+       <% } %>
+
+       <p>
+            <% usernames.map(user => { %>
+                     <%= user.username %>
+             <% }).join(','); %>
+       </p>
+
     </body>
 </html>
