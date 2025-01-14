@@ -7,7 +7,7 @@ const usersGet = async function (req, res) {
 };
 
 const usersNewGet = function (req, res) {
-  res.render('index', { title: 'Add User' });
+  ores.render('index', { title: 'Add User' });
 };
 
 const usersNewPost = async function (req, res) {
@@ -16,4 +16,12 @@ const usersNewPost = async function (req, res) {
   res.redirect('/');
 };
 
-module.exports = { usersGet, usersNewGet, usersNewPost };
+const usersSearchGet = async function (req, res) {
+  const { search } = req.query;
+  const usernames = await db.searchUsername(search);
+  res.send(
+    'Search Results: ' + usernames.map((user) => user.username).join(', '),
+  );
+};
+
+module.exports = { usersGet, usersNewGet, usersNewPost, usersSearchGet };
