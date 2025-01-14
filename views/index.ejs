@@ -16,7 +16,9 @@
                 <button type="submit">Submit</button>
             </div>
         </form>
-
+        <form method='GET' action="/delete">
+            <button type="submit">DELETE ALL USERS</button>
+        </form>
        <% if(searchResults) {%>
            <h2>Search Results:</h2>
            <ul>
@@ -28,11 +30,13 @@
            </ul>
        <% } %>
 
+       <% if(usernames) {%>
        <p>
             <% usernames.map(user => { %>
                      <%= user.username %>
              <% }).join(','); %>
        </p>
+       <% } %>
 
     </body>
 </html>

@@ -20,4 +20,9 @@ const usersNewPost = async function (req, res) {
   res.redirect('/');
 };
 
-module.exports = { usersGet, usersNewGet, usersNewPost };
+const usersDeleteGet = async function (req, res) {
+  await db.deleteUsernames();
+  res.redirect('/');
+};
+
+module.exports = { usersGet, usersNewGet, usersNewPost, usersDeleteGet };
